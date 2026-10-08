@@ -14,9 +14,7 @@ eventually all read requests will return the same value - this is called *conver
 However this is a very weak consistency!
 
 ## Linearizability
-**Basic Idea:** to make a system appear as if there was only one copy of the data,
-and all operations on it are atomic. With this guarantee, even though there may be
-multiple replicas in reality, the application does not need to worry about them.
+**Basic Idea:** to make a system appear as if there was only one copy of the data, and all operations on it are atomic. With this guarantee, even though there may be multiple replicas in reality, the application does not need to worry about them.
 
 Consider the image, it tells u an example of what a non-linearizable system looks like :
 
@@ -37,9 +35,7 @@ Consider a more complex example :
 Note the last read by B, the shaded one. It is not linearizable since A already read the value of x as 4.
 - cas(x, vold, vnew) ⇒ r means the client requested an atomic compare-and-set. If the current value of the register x equals vold, it should be atomically set to vnew. If x ≠ vold then the operation should leave the register unchanged and return an error. r is the database’s response (ok or error).
 
-It is possible (though computationally expensive) to test whether a system’s
-behavior is linearizable by recording the timings of all requests and responses, and
-checking whether they can be arranged into a valid sequential order
+It is possible (though computationally expensive) to test whether a system’s behavior is linearizable by recording the timings of all requests and responses, and checking whether they can be arranged into a valid sequential order
 
 ## Linearizablity - the Definition
 Linearizability is a recency guarantee on reads and writes of a register (an object). It  doesn’t group operations together into transactions, so it does not prevent problems such as write skew unless you take additional measures such as materializing conflicts
